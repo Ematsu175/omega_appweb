@@ -1,0 +1,75 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.navbar {
+    padding: 10px 20px;
+}
+  
+.navbar-nav .nav-link {
+    font-weight: bold;
+    margin-right: 20px;
+    text-transform: uppercase;
+    transition: color 0.3s; 
+}
+  
+.navbar-nav .nav-link:hover {
+    color: rgb(0, 0, 0) !important;
+}
+  
+.navbar-nav .btn-outline-light {
+    border: 2px solid #fff;
+    padding: 5px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+  
+.carousel-control-prev, 
+.carousel-control-next {
+  border: none;
+  background: none;
+}
+
+/* Asegurarse de que los íconos de los botones sean transparentes */
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); 
+  background-size: 100%, 100%;
+  border-radius: 50%; 
+}
+
+/* Eliminar cualquier estilo de borde no deseado en los íconos */
+.carousel-control-prev-icon:focus, 
+.carousel-control-next-icon:focus, 
+.carousel-control-prev-icon:active, 
+.carousel-control-next-icon:active {
+  outline: none; 
+}
+
+.carousel-item {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+} 
+
+footer {
+    background-color: #478ac9; /* Color de fondo del footer */
+    color: white; /* Color del texto */
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
