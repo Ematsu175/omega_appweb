@@ -7,7 +7,7 @@
         }
 
         function alerta($tipo, $mensaje){
-            //include('views/alert.php');
+            include('views/alert.php');
         }
 
         function getRol($correo){
@@ -43,6 +43,7 @@
             return $data;
         }
         function login($correo, $contrasena){
+            session_start();
             $contrasena = md5($contrasena);
             $acceso = false;
             if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
@@ -70,13 +71,18 @@
             return $acceso;
         }
         function logout(){
-            unset($_SESSION);
+            session_start();
+            session_unset();
+            session_destroy();
+            header('Location: /omega_appweb/index.html');
+            exit();
+            /*unset($_SESSION);
             session_destroy();
             $mensaje = "Gracias por utilizar el sistema, se ha cerrado la sesión. <a href='login.php'>[Presione aqí para volver a entrar]</a>";
             $tipo = "success";
             require_once('views/header.php');
             $this->alerta($tipo, $mensaje);
-            require_once('views/footer.php');
+            require_once('views/footer.php');*/
         }
 
         function checkRol($rol){
@@ -87,7 +93,7 @@
                     $tipo = "danger";
                     //require_once('views/header/alert.php');
                     $this->alerta($tipo, $mensaje);
-                    die();
+                    //die();
                 }
                 
             } else {

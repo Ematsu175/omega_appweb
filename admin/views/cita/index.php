@@ -1,4 +1,19 @@
-<?php require ('views/header_user/header_user.php') ?>
+<?php
+    session_start(); 
+    if (isset($_SESSION['roles'])) {
+        $roles = array_column($_SESSION['roles'], 'rol');
+        if (in_array('Administrador', $roles)) {
+            require('views/header_admin/header_admin.php');
+        } elseif (in_array('Usuario', $roles)) {
+            require('views/header_user/header_user.php');
+        } else {
+            die('Acceso no autorizado.');
+        }
+    } else {
+        header('Location: login.php');
+        exit;
+    }
+?>
     <h1>Citas</h1>
     <?php if(isset($mensaje)):$app->alerta($tipo,$mensaje); endif; ?>
     <div style="padding-left: 75px">

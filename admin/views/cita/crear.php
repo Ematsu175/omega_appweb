@@ -1,4 +1,19 @@
-<?php require('views/header.php'); ?>
+<?php
+    session_start(); 
+    if (isset($_SESSION['roles'])) {
+        $roles = array_column($_SESSION['roles'], 'rol'); // Extraer los roles del usuario
+        if (in_array('Administrador', $roles)) {
+            require('views/header_admin/header_admin.php');
+        } elseif (in_array('Usuario', $roles)) {
+            require('views/header_user/header_user.php');
+        } else {
+            die('Acceso no autorizado.');
+        }
+    } else {
+        header('Location: login.php');
+        exit;
+    }
+?>
 <h1> <?php if($accion=="crear"):echo('Nueva');else: echo('Modificar');endif; ?> Cita </h1>
 <form method="post" action="cita.php?accion=<?php if($accion=="crear"):echo('nuevo');else:echo('modificar&id='.$id);endif; ?>">
     <div class="mb-3">
