@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+    //session_start();
     require_once('views/header_user/header_user.php');
 ?>
 
@@ -20,14 +20,14 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
-                                Accordion Item #1
+                                ¿Cómo generar una cita?
                             </button>
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse"
                             data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                                demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion
-                                body.</div>
+                            <div class="accordion-body">Necesitas haber realizado un inicio de sesión y saber que tipo de sistema requiere tu empresa, teniendo eso en cuenta debes de irte a la 
+                                parte superior derecha de la página al apartado CITA, después darle clic a NUEVO y generar 
+                                registrar la cita.</div>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -35,14 +35,14 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
-                                Accordion Item #2
+                                Aspectos a tener en cuenta
                             </button>
                         </h2>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse"
                             data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                                demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion
-                                body. Let's imagine this being filled with some actual content.</div>
+                            <div class="accordion-body">
+                                No se pueden realizar citas los días sábados y domingos además 
+                                de que la cita no se puede generar el mismo día.</div>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -50,16 +50,47 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
-                                Accordion Item #3
+                                ¿Después de llenar el formulario que sigue?
                             </button>
                         </h2>
                         <div id="flush-collapseThree" class="accordion-collapse collapse"
                             data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                                demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion
-                                body. Nothing more exciting happening here in terms of content, but just filling up the
-                                space to make it look, at least at first glance, a bit more representative of how this
-                                would look in a real-world application.</div>
+                            <div class="accordion-body">
+                            Después de haber dado de alta la cita hay que tener en cuenta que el personal se encargará de revisarla y 
+                            establecer contacto con usted para poder fijar un horario de atención.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                aria-controls="flush-collapseFour">
+                                ¿Qué pasa después de concluir la cita?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                            Durante la cita se hablará de lo que hace nuestro producto y su funcionamiento para eso en el apartado de DEMO se le liberara una 
+                            versión de prueba y un manual de uso para que se familiarice con el sistema y ver si es de su agrado.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                aria-controls="flush-collapseFive">
+                                Contratación del sistema
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                            Para poder contratar el sistema si es de agrado del usuario después de probar el demo lo que debe de hacer 
+                            es ponerse en contacto con nuestro personal para poder llevar a cabo el acuerdo.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,6 +147,6 @@
 </section>
 
 <?php
-    print_r($_SESSION);
+    //print_r($_SESSION);
     require_once('views/footer.php'); 
 ?>
