@@ -1,4 +1,7 @@
-<?php require_once('views/header.php'); ?>
+<?php 
+    session_start();
+    require_once('views/header_user/header_user.php');
+?>
 
 <div class="full-width-banner">
     <img src="/omega_appweb/images/1430772363db5f8f75e57312dc268e61a841d655d7a3dc871173a82dadab1f2ccd5f160e5b6473d2bfc523b90dc782da48931f803b6c2c7be45ec2_1280.jpg"
@@ -112,4 +115,7 @@
     </div>
 </section>
 
-<?php require_once('views/footer.php'); ?>
+<?php
+    print_r($_SESSION);
+    require_once('views/footer.php'); 
+?>

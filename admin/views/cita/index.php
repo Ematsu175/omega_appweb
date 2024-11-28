@@ -46,4 +46,7 @@
         <?php endforeach;?>
         </tbody>
     </table>
-<?php require ('views/footer.php') ?>
+<?php
+    print_r($_SESSION);
+    require ('views/footer.php'); 
+?>

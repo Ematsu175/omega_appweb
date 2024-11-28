@@ -10,12 +10,16 @@
         case 'login':
             $correo=$_POST['data']['correo'];
             $contrasena=$_POST['data']['contrasena'];
+            
         
             if($app->login($correo, $contrasena)){
                 $roles=array_column($_SESSION['roles'], 'rol'); // Extrae los valores de 'rol'
                 $mensaje="";
                 $tipo="success";
                 $header="";
+
+                $usuario=$app->readOneUser($correo);
+                $_SESSION['id_usuario']=$usuario;
         
                 if (in_array('Administrador', $roles)) {
                     $mensaje="Bienvenido Administrador";

@@ -43,4 +43,7 @@
     
     <input type="submit" class="btn btn-success" name="data[enviar]" value="Guardar" />
 </form>
-
+<?php
+    print_r($_SESSION);
+    require ('views/footer.php'); 
+?>

@@ -1,7 +1,9 @@
-<?php require_once('views/header.php'); ?>
+<?php
+  require_once('views/header.php'); 
+?>
 <header class="u-clearfix u-header u-header" id="sec-b3b0">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <a href="#" class="u-image u-logo u-image-1" data-image-width="540" data-image-height="338">
+      <a href="index_usuario.php" class="u-image u-logo u-image-1" data-image-width="540" data-image-height="338">
         <img src="/omega_appweb/images/omegaapp_quienessomos.jpeg" class="u-logo-image u-logo-image-1">
       </a>
       <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
