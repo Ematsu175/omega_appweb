@@ -15,16 +15,19 @@
     }
 ?>
 <h1> <?php if($accion=="crear"):echo('Nueva');else: echo('Modificar');endif; ?> Cita </h1>
+<?php if(isset($mensaje)):$app->alerta($tipo,$mensaje); endif; ?>
 <form method="post" action="cita.php?accion=<?php if($accion=="crear"):echo('nuevo');else:echo('modificar&id='.$id);endif; ?>">
     <div class="mb-3">
         <label for="fecha" class="form-label">Fecha</label>
-        <input type="date" class="form-control" name="data[fecha_solicitud]" placeholder="Escribe aqui la fecha" 
-        value="<?php if(isset($citas['fecha_creacion'])):echo($citas['fecha_creacion']);endif; ?>" />
+        <input type="date" class="form-control" name="data[fecha_solicitud]" id="fecha" 
+            min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" 
+            placeholder="Escribe aquí la fecha" value="<?php echo isset($citas['fecha_solicitud']) ? $citas['fecha_solicitud'] : ''; ?>"/>
+        <span id="fecha-error" style="color: red; display: none;"></span>
     </div>
     <div class="mb-3">
         <label for="observaciones" class="form-label">Observasiones</label>
         <input type="text" class="form-control" name="data[observaciones]" placeholder="Escribe las observaciones" 
-        value="<?php if(isset($citas['observaciones'])):echo($citas['observaciones']);endif; ?>" />
+        value="<?php echo isset($citas['observaciones']) ? htmlspecialchars($citas['observaciones']) : ''; ?>" />
     </div>
     <div class="mb-3">
         <label for="" >Empresa</label>

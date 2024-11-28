@@ -13,6 +13,17 @@
             break;
         case 'nuevo':
             $data=$_POST['data'];
+            $fecha=$data['fecha_solicitud'];
+            $dia_semana=date('w',strtotime($fecha));
+            $manana = date('Y-m-d', strtotime('+1 day'));
+            if($fecha<$manana ||$dia_semana==0 || $dia_semana==6){
+                $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
+                $tipo="danger";
+                $empresa = $appEmpresa->readAll();
+                include('views/cita/crear.php');
+                echo("No se puede agendar citas sabado o domingos");
+                break;            
+            }
             $resultado=$app->create($data);
             if($resultado){
                 $mensaje="Cita dada de alta correctamente";
@@ -34,7 +45,18 @@
         
         case 'modificar':
             $data=$_POST['data'];
+            $fecha=$data['fecha_solicitud'];
+            $dia_semana=date('w',strtotime($fecha));
+            $manana = date('Y-m-d', strtotime('+1 day'));
             $result = $app->update($id,$data);
+            if($fecha<$manana ||$dia_semana==0 || $dia_semana==6){
+                $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
+                $tipo="danger";
+                $empresa = $appEmpresa->readAll();
+                include('views/cita/crear.php');
+                echo("No se puede agendar citas sabado o domingos");
+                break;            
+            }
             //print_r($result);
             if($result){
                 $mensaje="Cita actualizada correctamente";
