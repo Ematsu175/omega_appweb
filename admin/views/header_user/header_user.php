@@ -36,6 +36,10 @@
                 class="u-active-palette-1-base u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-palette-1-light-1 u-nav-link u-text-active-white u-text-grey-90 u-text-hover-white"
                 style="padding: 10px 20px;" href="#">Usuario</a>
             </li>
+            <li class="u-nav-item"><a
+                class="u-active-palette-1-base u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-palette-1-light-1 u-nav-link u-text-active-white u-text-grey-90 u-text-hover-white"
+                style="padding: 10px 20px;" href="login.php?accion=logout">Salir</a>
+            </li>
           </ul>
         </div>
         <div class="u-custom-menu u-nav-container-collapse">

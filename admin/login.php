@@ -20,17 +20,19 @@
                 if (in_array('Administrador', $roles)) {
                     $mensaje="Bienvenido Administrador";
                     $header="views/header_admin/header_admin.php";
+                    $index="index_admin.php";
                 } elseif (in_array('Usuario', $roles)) {
                     $mensaje="Bienvenido de nuevo Usuario";
                     $header="views/header_user/header_user.php";
+                    $index="index_usuario.php";
                 } else {
                     $mensaje="No se pudo acceder al sistema";
                 }
-        
+                
+                
                 require_once($header);
-                //require_once('views/header_user/header_user.php');
                 $app->alerta($tipo, $mensaje);
-                //echo $mensaje; 
+                require_once($index); 
                 require_once('views/footer.php');
             } else {
                 $mensaje = "Correo o contraseña no válidos <a href='login.php'>[Presione aquí para volver a intentar.]</a>";

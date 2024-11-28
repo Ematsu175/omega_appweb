@@ -1,0 +1,76 @@
+.full-width-banner img {
+    width: 100vw; 
+    height: 500px; 
+    object-fit: cover; 
+    display: block; 
+    margin: 0; 
+    padding: 0; 
+    filter: brightness(30%);
+}
+.full-width-banner img {
+    width: 100vw; 
+    height: 300px; 
+    object-fit: cover; 
+    display: block; 
+    margin: 0;
+    padding: 0;
+}
+
+
+.custom-image img {
+    width: 50%; /* La imagen ocupa todo el ancho de su contenedor */
+    height: auto; /* Mantiene las proporciones originales */
+    display: block; /* Elimina espacios en blanco alrededor de la imagen */
+    object-fit: contain; /* Asegura que la imagen no pierda calidad y se ajuste sin recorte */
+}
+
+.container.text-center {
+    margin-top: 20px; 
+}
+
+.container .row {
+    display: flex;
+    align-items: flex-start; /* Alinea los elementos desde la parte superior */
+    gap: 20px; /* Espacio entre columnas */
+}
+
+.col-md-8 {
+    flex: 2; /* Da más espacio a los acordeones */
+}
+
+.col-md-4 {
+    flex: 1; /* Da menos espacio a la imagen */
+}
+
+.col-md-4 img {
+    max-width: 150%; /* Asegura que la imagen no exceda su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 8px; /* Redondea los bordes de la imagen */
+}
+
+#centered-card {
+    margin: 0 auto; /* Centra horizontalmente */
+    width: fit-content; /* O ajusta a un ancho específico si necesario */
+}
+
+#card{
+    padding: 30px;
+    margin: 30px;
+}
+
+/* Selecciona la segunda sección */
+section:nth-of-type(2) {
+    background-color: #3b5565; /* Azul */
+    padding: 40px 0; /* Espacio interno superior e inferior */
+    color: white; /* Cambia el texto a blanco para contraste */
+}
+
+/* Estilo para las tarjetas dentro de la sección */
+section:nth-of-type(2) .card {
+    background-color: white; /* Fondo blanco para destacar */
+    color: black; /* Texto negro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
+
+
