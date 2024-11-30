@@ -1,4 +1,4 @@
-<?php
+<?php 
     require_once('cita.class.php');
     require_once('empresa.class.php');
     $app = new Cita;
@@ -20,9 +20,20 @@
                 $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
                 $tipo="danger";
                 $empresa = $appEmpresa->readAll();
-                include('views/cita/crear.php');
+                $citas=$app->readAll();
+                include('views/cita/index.php');
                 echo("No se puede agendar citas sabado o domingos");
                 break;            
+            }
+            $totalCitas=$app->checkCitasPorFecha($fecha);
+            if ($totalCitas>=3) {
+                $mensaje = "Ya hay tres citas programadas para este día. No se pueden agendar más citas.";
+                $tipo = "danger";
+                $empresa = $appEmpresa->readAll();
+                $citas = $app->readAll();
+                include('views/cita/index.php');
+                echo("No se pueden agendar más de tres citas para este día.");
+                break;
             }
             $resultado=$app->create($data);
             if($resultado){
@@ -48,16 +59,26 @@
             $fecha=$data['fecha_solicitud'];
             $dia_semana=date('w',strtotime($fecha));
             $manana = date('Y-m-d', strtotime('+1 day'));
-            $result = $app->update($id,$data);
+            $totalCitas = $app->checkCitasPorFecha($fecha);
+
+            if ($totalCitas >= 3) {
+                $mensaje = "Ya hay tres citas programadas para este día. No se pueden actualizar la cita para ese día.";
+                $tipo = "danger";
+                $citas = $app->readAll();
+                include('views/cita/index.php');
+                break; 
+            }
+            
             if($fecha<$manana ||$dia_semana==0 || $dia_semana==6){
                 $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
                 $tipo="danger";
-                $empresa = $appEmpresa->readAll();
-                include('views/cita/crear.php');
+                $citas=$app->readAll();
+                include('views/cita/index.php');
                 echo("No se puede agendar citas sabado o domingos");
                 break;            
             }
             //print_r($result);
+            $result = $app->update($id,$data);
             if($result){
                 $mensaje="Cita actualizada correctamente";
                 $tipo="success";

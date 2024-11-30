@@ -13,13 +13,16 @@
             
         
             if($app->login($correo, $contrasena)){
-                $roles=array_column($_SESSION['roles'], 'rol'); // Extrae los valores de 'rol'
+                $roles=array_column($_SESSION['roles'], 'rol'); 
                 $mensaje="";
                 $tipo="success";
                 $header="";
 
                 $usuario=$app->readOneUser($correo);
+                //print_r($usuario);
                 $_SESSION['id_usuario']=$usuario;
+                $empresa=$app->readOneEmpresa($usuario['id_usuario']);
+                $_SESSION['id_empresa']=$empresa;
         
                 if (in_array('Administrador', $roles)) {
                     $mensaje="Bienvenido Administrador";

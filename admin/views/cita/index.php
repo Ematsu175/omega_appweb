@@ -47,6 +47,6 @@
         </tbody>
     </table>
 <?php
-    print_r($_SESSION);
+    //print_r($_SESSION);
     require ('views/footer.php'); 
 ?>

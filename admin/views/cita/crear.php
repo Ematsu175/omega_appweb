@@ -25,7 +25,7 @@
         <span id="fecha-error" style="color: red; display: none;"></span>
     </div>
     <div class="mb-3">
-        <label for="observaciones" class="form-label">Observasiones</label>
+        <label for="observaciones" class="form-label">Observaciones</label>
         <input type="text" class="form-control" name="data[observaciones]" placeholder="Escribe las observaciones" 
         value="<?php echo isset($citas['observaciones']) ? htmlspecialchars($citas['observaciones']) : ''; ?>" />
     </div>
@@ -35,7 +35,7 @@
             <?php foreach($empresa as $empresas): ?>
             <?php 
                 $selected="";
-                if($citas['id_empresa'] == $empresas['id_empresa']){
+                if(isset($citas['id_empresa']) && $citas['id_empresa'] == $empresas['id_empresa']){
                     $selected = "selected";
                 }
             ?>
@@ -47,6 +47,6 @@
     <input type="submit" class="btn btn-success" name="data[enviar]" value="Guardar" />
 </form>
 <?php
-    print_r($_SESSION);
+    //print_r($_SESSION);
     require ('views/footer.php'); 
 ?>

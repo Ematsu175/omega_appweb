@@ -118,5 +118,16 @@
             return $result;
         }
 
+        function readOneEmpresa($id_usuario){
+            $this->conexion();
+            $result=[];
+            $consulta='select id_empresa from usuario_empresa where id_usuario=:id_usuario;';
+            $sql = $this->con->prepare($consulta);
+            $sql->bindParam("id_usuario",$id_usuario,PDO::PARAM_INT);
+            $sql->execute();
+            $result = $sql->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
     }
 ?>
