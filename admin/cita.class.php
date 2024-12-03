@@ -87,7 +87,7 @@
         function readAll() {
             $this->conexion();
             $result=[];
-            $consulta='select c.*, e.empresa from cita c join empresa e on c.id_empresa=e.id_empresa;';
+            $consulta='select c.*, e.empresa from cita c join empresa e on c.id_empresa=e.id_empresa order by c.fecha_solicitud asc;';
             $sql = $this->con->prepare($consulta);
             $sql->execute();
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);

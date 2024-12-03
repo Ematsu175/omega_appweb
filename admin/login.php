@@ -20,15 +20,16 @@
 
                 $usuario=$app->readOneUser($correo);
                 //print_r($usuario);
-                $_SESSION['id_usuario']=$usuario;
-                $empresa=$app->readOneEmpresa($usuario['id_usuario']);
-                $_SESSION['id_empresa']=$empresa;
+                
         
                 if (in_array('Administrador', $roles)) {
                     $mensaje="Bienvenido Administrador";
                     $header="views/header_admin/header_admin.php";
                     $index="index_admin.php";
                 } elseif (in_array('Usuario', $roles)) {
+                    $_SESSION['id_usuario']=$usuario;
+                    $empresa=$app->readOneEmpresa($usuario['id_usuario']);
+                    $_SESSION['id_empresa']=$empresa;
                     $mensaje="Bienvenido de nuevo Usuario";
                     $header="views/header_user/header_user.php";
                     $index="index_usuario.php";
