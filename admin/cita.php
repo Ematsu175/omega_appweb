@@ -1,10 +1,25 @@
 <?php 
+    session_start();
+    
+    // Extraer los valores necesarios
+    //print_r($_SESSION);
+    $id_usuario = $_SESSION['id_usuario'];
+    $rol = $_SESSION['roles'][0]['rol'];
+    
+    // Verificación de depuración (puedes eliminar esto después de verificar)
+    /*echo "<pre>";
+    print_r($_SESSION);
+    echo "ID Usuario: $id_usuario, Rol: $rol";
+    echo "</pre>";*/
+    
+    // Cargar clases y manejar lógica de acciones
     require_once('cita.class.php');
     require_once('empresa.class.php');
+    
     $app = new Cita;
     $appEmpresa = new Empresa;
-    $accion = (isset($_GET['accion']))?$_GET['accion']:null;
-    $id = (isset($_GET['id']))?$_GET['id']:null;
+    $accion = (isset($_GET['accion'])) ? $_GET['accion'] : null;
+    $id = (isset($_GET['id'])) ? $_GET['id'] : null;   
 
     switch($accion){
         case 'crear':
@@ -20,7 +35,7 @@
                 $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
                 $tipo="danger";
                 $empresa = $appEmpresa->readAll();
-                $citas=$app->readAll();
+                $citas=$app->readAll($_SESSION['id_usuario'],$_SESSION['rol']);
                 include('views/cita/index.php');
                 echo("No se puede agendar citas sabado o domingos");
                 break;            
@@ -30,7 +45,7 @@
                 $mensaje = "Ya hay tres citas programadas para este día. No se pueden agendar más citas.";
                 $tipo = "danger";
                 $empresa = $appEmpresa->readAll();
-                $citas = $app->readAll();
+                $citas = $app->readAll($id_usuario, $rol);
                 include('views/cita/index.php');
                 echo("No se pueden agendar más de tres citas para este día.");
                 break;
@@ -44,7 +59,7 @@
                 $mensaje="Hubo un error al momento de agendar la cita";
                 $tipo="danger";
             }
-            $citas=$app->readAll();
+            $citas=$app->readAll($id_usuario, $rol);
             include('views/cita/index.php');
             break;
 
@@ -64,7 +79,7 @@
             if ($totalCitas >= 3) {
                 $mensaje = "Ya hay tres citas programadas para este día. No se pueden actualizar la cita para ese día.";
                 $tipo = "danger";
-                $citas = $app->readAll();
+                $citas = $app->readAll($id_usuario, $rol);
                 include('views/cita/index.php');
                 break; 
             }
@@ -72,7 +87,7 @@
             if($fecha<$manana ||$dia_semana==0 || $dia_semana==6){
                 $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
                 $tipo="danger";
-                $citas=$app->readAll();
+                $citas=$app->readAll($id_usuario, $rol);
                 include('views/cita/index.php');
                 echo("No se puede agendar citas sabado o domingos");
                 break;            
@@ -87,7 +102,7 @@
                 $mensaje="Hubo un error no se pudo actualizar la cita";
                 $tipo="danger";
             }
-            $citas=$app->readAll();
+            $citas=$app->readAll($id_usuario, $rol);
             include('views/cita/index.php');
             break;
 
@@ -104,12 +119,22 @@
                     }
                 }
             }
-            $citas=$app->readAll();
+            $citas=$app->readAll($id_usuario, $rol);
             include('views/cita/index.php');
             
             break;
         default:
-            $citas=$app->readAll();
-            include('views/cita/index.php');
+        //echo('entra al default');
+            try {
+                $citas = $app->readAll($id_usuario, $rol); // Pasar $id_usuario y $rol al método
+                //print_r($citas);
+                include('views/cita/index.php');
+            } catch (Exception $e) {
+                die('Error: ' . $e->getMessage());
+            }
+            break;
+        
+        
+        
     }
 ?>

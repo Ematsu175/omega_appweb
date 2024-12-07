@@ -84,31 +84,57 @@
             return $result;
         }
 
-        function readAll() {
+        /*
+        select c.*, e.empresa 
+        from cita c join empresa e on c.id_empresa=e.id_empresa     
+        join usuario_empresa ue on e.id_empresa=ue.id_empresa
+        join usuario u on ue.id_usuario=u.id_usuario 
+        join usuario_rol ur on ue.id_usuario=ur.id_usuario
+        join rol r on ur.id_rol=r.id_rol
+        where e.id_empresa=2 and u.id_usuario=2 and r.rol="Usuario";
+        */
+        function readAll($id_usuario = null, $rol = null) {
             $this->conexion();
-            $result=[];
-            $consulta='select c.*, e.empresa from cita c join empresa e on c.id_empresa=e.id_empresa order by c.fecha_solicitud asc;';
+            $result = [];
+            //print_r($rol);
+            //$rol='Usuario';
+            if ($rol == 'Administrador') {
+                $consulta = 'SELECT c.id_cita, c.fecha_solicitud, c.observaciones, e.empresa 
+                             FROM cita c
+                             JOIN empresa e ON c.id_empresa = e.id_empresa
+                             ORDER BY c.fecha_solicitud DESC;';
+            } elseif ($rol == 'Usuario' && $id_usuario !== null) {
+                //echo('Entro al if de rol usuario');
+                //echo($rol);
+                //echo($id_usuario);
+                $consulta = 'SELECT c.id_cita, c.fecha_solicitud, c.observaciones, e.empresa 
+                             FROM cita c
+                             JOIN empresa e ON c.id_empresa = e.id_empresa
+                             WHERE c.id_empresa = (
+                                 SELECT id_empresa 
+                                 FROM usuario_empresa 
+                                 WHERE id_usuario = :id_usuario
+                             )
+                             ORDER BY c.fecha_solicitud DESC;';
+                //echo($consulta);
+            } else {
+                throw new Exception('Error: El rol o ID de usuario no es válido.');
+            }
+        
             $sql = $this->con->prepare($consulta);
+        
+            if ($rol == 'Usuario' && $id_usuario !== null) {
+                $sql->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+            }
+        
             $sql->execute();
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+            //print_r($result);
+        
             return $result;
         }
-
-        function readAllUser($id_usuario, $id_empresa) {
-            $this->conexion();
-            $result=[];
-            $consulta='select c.*, e.empresa from cita c join empresa e on c.id_empresa=e.id_empresa 
-                                                         join usuario_empresa ue on e.id_empresa=ue.id_empresa
-                                                         join usuario u on ue.id_usuario=u.id_usuario 
-                                                         where e.id_empresa=:id_empresa and u.id_usuario=:id_usuario;';
-            $sql = $this->con->prepare($consulta);
-            $sql->bindParam("id_empresa", $id_empresa, PDO::PARAM_INT);
-            $sql->bindParam("id_usuario", $id_usuario, PDO::PARAM_INT);
-            $sql->execute();
-            $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }
-
+        
+   
         function checkCitasPorFecha($fecha_solicitud) {
             $this->conexion();
             $result = [];
