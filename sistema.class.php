@@ -43,7 +43,9 @@
             return $data;
         }
         function login($correo, $contrasena){
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
             $contrasena = md5($contrasena);
             $acceso = false;
             if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
@@ -128,6 +130,7 @@
             $result = $sql->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
+        
 
     }
 ?>

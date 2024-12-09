@@ -1,4 +1,16 @@
 <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['id_usuario'])) {
+        // Si no hay sesión, redirigir al login
+        $_SESSION['mensaje'] = "Hay una sesión activa.";
+        header("Location: /omega_appweb/admin/login.php");
+        exit;
+    }
     require_once('usuario.class.php');
     $app = new Usuario;
     $accion = (isset($_GET['accion']))?$_GET['accion']:null;

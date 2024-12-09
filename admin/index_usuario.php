@@ -1,5 +1,18 @@
 <?php 
-    //session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['id_usuario'])) {
+        // Si no hay sesión, redirigir al login
+        $_SESSION['mensaje'] = "Hay una sesión activa.";
+        header("Location: /omega_appweb/admin/login.php");
+        exit;
+    }
+    
+    // Si hay una sesión activa, puedes cargar el contenido de la página
     require_once('views/header_user/header_user.php');
 ?>
 
