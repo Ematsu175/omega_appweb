@@ -2,28 +2,15 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    
-
-    // Verificar si el usuario ha iniciado sesión
     if (!isset($_SESSION['id_usuario'])) {
-        // Si no hay sesión, redirigir al login
         $_SESSION['mensaje'] = "Hay una sesión activa.";
         header("Location: /omega_appweb/admin/login.php");
         exit;
     }
     
-    // Extraer los valores necesarios
-    //print_r($_SESSION);
     $id_usuario = $_SESSION['id_usuario'];
     $rol = $_SESSION['roles'][0]['rol'];
-    
-    // Verificación de depuración (puedes eliminar esto después de verificar)
-    /*echo "<pre>";
-    print_r($_SESSION);
-    echo "ID Usuario: $id_usuario, Rol: $rol";
-    echo "</pre>";*/
-    
-    // Cargar clases y manejar lógica de acciones
+
     require_once('cita.class.php');
     require_once('empresa.class.php');
     

@@ -86,9 +86,7 @@
                 if(!in_array($rol, $roles)){
                     $mensaje = "Error usted no tiene el rol adecuado";
                     $tipo = "danger";
-                    //require_once('views/header/alert.php');
                     $this->alerta($tipo, $mensaje);
-                    //die();
                 }
                 
             } else {
@@ -96,7 +94,6 @@
                 $tipo = "danger";
                 require_once('views/header.php');
                 $this->alerta($tipo, $mensaje);
-                //require_once('views/footer.php');
                 die();
             }
             
@@ -126,17 +123,6 @@
             $result = $sql->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
-        
-        /*function readOneEmpresa($id_usuario){
-            $this->conexion();
-            $result=[];
-            $consulta='select id_empresa from usuario_empresa where id_usuario=:id_usuario;';
-            $sql = $this->con->prepare($consulta);
-            $sql->bindParam("id_usuario",$id_usuario,PDO::PARAM_INT);
-            $sql->execute();
-            $result = $sql->fetch(PDO::FETCH_ASSOC);
-            return $result;
-        }*/
         
 
     }

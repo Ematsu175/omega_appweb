@@ -24,7 +24,7 @@
             include('views/usuario/crear.php');
             break;
             case 'nuevo':
-                $data = $_POST['data']; // Asegúrate de que todos los datos necesarios están en el formulario
+                $data = $_POST['data']; 
                 $resultado = $app->create($data);
             
                 if ($resultado) {
@@ -42,9 +42,9 @@
                 break;
 
         case 'actualizar':
-            $usuario = $app->readOne($id); // Obtiene los datos del usuario
-            $figura_fiscal = $appFiguraFiscal->readAll(); // Lista de figuras fiscales
-            $empresa = $app->readEmpresaByUsuario($id); // Obtiene los datos de la empresa relacionada
+            $usuario = $app->readOne($id); 
+            $figura_fiscal = $appFiguraFiscal->readAll(); 
+            $empresa = $app->readEmpresaByUsuario($id); 
             include('views/usuario/crear.php');
             break;
         

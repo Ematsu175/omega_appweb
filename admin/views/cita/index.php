@@ -1,7 +1,4 @@
 <?php
-    
-    //print_r($citas);
-    //session_start(); 
     if (isset($_SESSION['roles'])) {
         $roles = array_column($_SESSION['roles'], 'rol');
         if (in_array('Administrador', $roles)) {

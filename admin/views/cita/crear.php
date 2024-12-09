@@ -2,17 +2,13 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    
-
-    // Verificar si el usuario ha iniciado sesión
     if (!isset($_SESSION['id_usuario'])) {
-        // Si no hay sesión, redirigir al login
         $_SESSION['mensaje'] = "Hay una sesión activa.";
         header("Location: /omega_appweb/admin/login.php");
         exit;
     }
     if (isset($_SESSION['roles'])) {
-        $roles = array_column($_SESSION['roles'], 'rol'); // Extraer los roles del usuario
+        $roles = array_column($_SESSION['roles'], 'rol');
         if (in_array('Administrador', $roles)) {
             require('views/header_admin/header_admin.php');
         } elseif (in_array('Usuario', $roles)) {
@@ -45,12 +41,10 @@
     <select name="data[id_empresa]" id="id_empresa" class="form-select" 
         <?php echo in_array('Usuario', $roles) ? 'disabled' : ''; ?>>
         <?php if (in_array('Usuario', $roles)): ?>
-            <!-- Usuario solo ve su empresa -->
             <option value="<?php echo $_SESSION['id_empresa']; ?>" selected>
                 <?php echo $_SESSION['empresa_nombre']; ?>
             </option>
         <?php else: ?>
-            <!-- Administrador ve todas las empresas -->
             <?php foreach ($empresa as $empresas): ?>
                 <?php 
                     $selected = "";
@@ -64,7 +58,6 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </select>
-    <!-- Campo oculto para enviar id_empresa si el combobox está deshabilitado -->
     <?php if (in_array('Usuario', $roles)): ?>
         <input type="hidden" name="data[id_empresa]" value="<?php echo $_SESSION['id_empresa']; ?>" />
     <?php endif; ?>
