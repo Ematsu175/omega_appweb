@@ -3,59 +3,70 @@
         session_start();
     }
     
-
-    // Verificar si el usuario ha iniciado sesión
     if (!isset($_SESSION['id_usuario'])) {
-        // Si no hay sesión, redirigir al login
         $_SESSION['mensaje'] = "Hay una sesión activa.";
         header("Location: /omega_appweb/admin/login.php");
         exit;
     }
-    require_once('usuario.class.php');
+    require('usuario.class.php');
+    require('figura_fiscal.class.php');
+    require('empresa.class.php');
     $app = new Usuario;
+    $appFiguraFiscal = new Figura_fiscal;
+    $appEmpresa = new Empresa;
     $accion = (isset($_GET['accion']))?$_GET['accion']:null;
     $id = (isset($_GET['id']))?$_GET['id']:null;
 
     switch($accion){
         case 'crear':
+            $appFiguraFiscal = new Figura_fiscal;
             $usuario = $app->readAll();
+            $figura_fiscal = $appFiguraFiscal->readAll();
             include('views/usuario/crear.php');
             break;
-        case 'nuevo':
-            $data=$_POST['data'];
-            $resultado=$app->create($data);
-            if($resultado){
-                $mensaje="Usuario dado de alta correctamente";
-                $tipo="success";
-
-            } else {
-                $mensaje="Hubo un error al momento de agregar al usuario";
-                $tipo="danger";
-            }
-            $usuario=$app->readAll();
-            include('views/usuario/index.php');
-            break;
+            case 'nuevo':
+                $data = $_POST['data']; // Asegúrate de que todos los datos necesarios están en el formulario
+                $resultado = $app->create($data);
+            
+                if ($resultado) {
+                    $mensaje = "Usuario dado de alta correctamente";
+                    $tipo = "success";
+                } else {
+                    $mensaje = "Hubo un error al momento de agregar al usuario";
+                    $tipo = "danger";
+                }
+            
+                $usuario = $app->readAll();
+                $figura_fiscal = $appFiguraFiscal->readAll();
+                $empresa = $appEmpresa->readAll();
+                include('views/usuario/index.php');
+                break;
 
         case 'actualizar':
-            $usuario=$app->readOne($id);
+            $usuario = $app->readOne($id); // Obtiene los datos del usuario
+            $figura_fiscal = $appFiguraFiscal->readAll(); // Lista de figuras fiscales
+            $empresa = $app->readEmpresaByUsuario($id); // Obtiene los datos de la empresa relacionada
             include('views/usuario/crear.php');
             break;
         
         case 'modificar':
-            $data=$_POST['data'];
-            $result = $app->update($id,$data);
-            //print_r($result);
-            if($result){
-                $mensaje="Usuario actualizado correctamente";
-                $tipo="success";
-
+            $data = $_POST['data'];
+            $result = $app->update($id, $data);
+            
+            if ($result) {
+                $mensaje = "Usuario actualizado correctamente";
+                $tipo = "success";
             } else {
-                $mensaje="Hubo un error no se pudo actualizar el usuario";
-                $tipo="danger";
+                $mensaje = "Hubo un error, no se pudo actualizar el usuario";
+                $tipo = "danger";
             }
-            $usuario=$app->readAll();
+            
+            $usuario = $app->readAll();
+            $figura_fiscal = $appFiguraFiscal->readAll();
+            $empresa = $appEmpresa->readAll();
             include('views/usuario/index.php');
             break;
+            
 
         case 'eliminar':           
             if (!is_null($id)) {

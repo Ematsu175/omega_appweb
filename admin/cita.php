@@ -45,8 +45,7 @@
             if($fecha<$manana ||$dia_semana==0 || $dia_semana==6){
                 $mensaje="La fecha seleccionada no es válida. Debe ser al siguiente día y no puede ser sábado o domingo.";
                 $tipo="danger";
-                $empresa = $appEmpresa->readAll();
-                $citas=$app->readAll($_SESSION['id_usuario'],$_SESSION['rol']);
+                $citas=$app->readAll($id_usuario,$rol);
                 include('views/cita/index.php');
                 echo("No se puede agendar citas sabado o domingos");
                 break;            
@@ -137,7 +136,7 @@
         default:
         //echo('entra al default');
             try {
-                $citas = $app->readAll($id_usuario, $rol); // Pasar $id_usuario y $rol al método
+                $citas = $app->readAll($id_usuario, $rol); 
                 //print_r($citas);
                 include('views/cita/index.php');
             } catch (Exception $e) {

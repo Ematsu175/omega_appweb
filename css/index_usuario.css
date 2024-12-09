@@ -18,10 +18,10 @@
 
 
 .custom-image img {
-    width: 50%; /* La imagen ocupa todo el ancho de su contenedor */
-    height: auto; /* Mantiene las proporciones originales */
-    display: block; /* Elimina espacios en blanco alrededor de la imagen */
-    object-fit: contain; /* Asegura que la imagen no pierda calidad y se ajuste sin recorte */
+    width: 50%; 
+    height: auto; 
+    display: block; 
+    object-fit: contain; 
 }
 
 .container.text-center {
@@ -30,27 +30,27 @@
 
 .container .row {
     display: flex;
-    align-items: flex-start; /* Alinea los elementos desde la parte superior */
-    gap: 20px; /* Espacio entre columnas */
+    align-items: flex-start; 
+    gap: 20px; 
 }
 
 .col-md-8 {
-    flex: 2; /* Da más espacio a los acordeones */
+    flex: 2; 
 }
 
 .col-md-4 {
-    flex: 1; /* Da menos espacio a la imagen */
+    flex: 1; 
 }
 
 .col-md-4 img {
-    max-width: 150%; /* Asegura que la imagen no exceda su contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-    border-radius: 8px; /* Redondea los bordes de la imagen */
+    max-width: 150%; 
+    height: auto; 
+    border-radius: 8px; 
 }
 
 #centered-card {
-    margin: 0 auto; /* Centra horizontalmente */
-    width: fit-content; /* O ajusta a un ancho específico si necesario */
+    margin: 0 auto; 
+    width: fit-content; 
 }
 
 #card{
@@ -58,19 +58,18 @@
     margin: 30px;
 }
 
-/* Selecciona la segunda sección */
 section:nth-of-type(2) {
-    background-color: #3b5565; /* Azul */
-    padding: 40px 0; /* Espacio interno superior e inferior */
-    color: white; /* Cambia el texto a blanco para contraste */
+    background-color: #3b5565; 
+    padding: 40px 0; 
+    color: white; 
 }
 
-/* Estilo para las tarjetas dentro de la sección */
+
 section:nth-of-type(2) .card {
-    background-color: white; /* Fondo blanco para destacar */
-    color: black; /* Texto negro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    background-color: white; 
+    color: black; 
+    border-radius: 10px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
