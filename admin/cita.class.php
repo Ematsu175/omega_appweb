@@ -83,30 +83,15 @@
             $result = $sql->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
-
-        /*
-        select c.*, e.empresa 
-        from cita c join empresa e on c.id_empresa=e.id_empresa     
-        join usuario_empresa ue on e.id_empresa=ue.id_empresa
-        join usuario u on ue.id_usuario=u.id_usuario 
-        join usuario_rol ur on ue.id_usuario=ur.id_usuario
-        join rol r on ur.id_rol=r.id_rol
-        where e.id_empresa=2 and u.id_usuario=2 and r.rol="Usuario";
-        */
         function readAll($id_usuario = null, $rol = null) {
             $this->conexion();
             $result = [];
-            //print_r($rol);
-            //$rol='Usuario';
             if ($rol == 'Administrador') {
                 $consulta = 'SELECT c.id_cita, c.fecha_solicitud, c.observaciones, e.empresa 
                              FROM cita c
                              JOIN empresa e ON c.id_empresa = e.id_empresa
                              ORDER BY c.fecha_solicitud DESC;';
             } elseif ($rol == 'Usuario' && $id_usuario !== null) {
-                //echo('Entro al if de rol usuario');
-                //echo($rol);
-                //echo($id_usuario);
                 $consulta = 'SELECT c.id_cita, c.fecha_solicitud, c.observaciones, e.empresa 
                              FROM cita c
                              JOIN empresa e ON c.id_empresa = e.id_empresa
@@ -116,7 +101,6 @@
                                  WHERE id_usuario = :id_usuario
                              )
                              ORDER BY c.fecha_solicitud DESC;';
-                //echo($consulta);
             } else {
                 throw new Exception('Error: El rol o ID de usuario no es válido.');
             }

@@ -78,13 +78,6 @@
             session_destroy();
             header('Location: /omega_appweb/index.html');
             exit();
-            /*unset($_SESSION);
-            session_destroy();
-            $mensaje = "Gracias por utilizar el sistema, se ha cerrado la sesión. <a href='login.php'>[Presione aqí para volver a entrar]</a>";
-            $tipo = "success";
-            require_once('views/header.php');
-            $this->alerta($tipo, $mensaje);
-            require_once('views/footer.php');*/
         }
 
         function checkRol($rol){

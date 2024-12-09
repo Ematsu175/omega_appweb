@@ -140,15 +140,15 @@
         }
 
         function readEmpresaByUsuario($id_usuario) {
-            $this->conexion();
-            $consulta = "SELECT e.* 
-                         FROM empresa e 
-                         JOIN usuario_empresa ue ON e.id_empresa = ue.id_empresa
-                         WHERE ue.id_usuario = :id_usuario";
-            $sql = $this->con->prepare($consulta);
-            $sql->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-            $sql->execute();
-            return $sql->fetch(PDO::FETCH_ASSOC);
-        }
+    $this->conexion();
+    $consulta = "SELECT e.* 
+                 FROM empresa e 
+                 JOIN usuario_empresa ue ON e.id_empresa = ue.id_empresa
+                 WHERE ue.id_usuario = :id_usuario";
+    $sql = $this->con->prepare($consulta);
+    $sql->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+    $sql->execute();
+    return $sql->fetch(PDO::FETCH_ASSOC);
+}
     }
 ?>

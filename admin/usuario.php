@@ -19,7 +19,6 @@
 
     switch($accion){
         case 'crear':
-            $appFiguraFiscal = new Figura_fiscal;
             $usuario = $app->readAll();
             $figura_fiscal = $appFiguraFiscal->readAll();
             include('views/usuario/crear.php');

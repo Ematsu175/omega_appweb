@@ -1,6 +1,6 @@
-<?php require ('views/header_admin/header_admin.php') ?>
+<?php require_once('views/header.php'); ?>
 <h1> <?php if($accion=="crear"):echo('Nuevo');else: echo('Modificar');endif; ?> Usuario </h1>
-<form method="post" action="usuario.php?accion=modificar&id=<?php echo $id; ?>">
+<form method="post" action="usuario.php?accion=<?php if($accion=="crear"):echo('nuevo');else:echo('modificar&id='.$id);endif; ?>">
     <div class="mb-3">
         <label for="correo">Correo</label>
         <input type="email" name="data[correo]" id="correo" class="form-control" 
