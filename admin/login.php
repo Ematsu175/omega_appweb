@@ -29,8 +29,8 @@ if (isset($_SESSION['mensaje'])) {
                 if (in_array('Usuario', $roles)) {
                     $_SESSION['id_usuario'] = $usuario['id_usuario']; 
                     $_SESSION['id_empresa'] = $empresa['id_empresa'];
+                    $_SESSION['empresa_nombre'] = $empresa['empresa'];
                     $_SESSION['mensaje'] = "Bienvenido de nuevo Usuario";
-                    
                     // Redirigir a index_usuario.php
                     header("Location: /omega_appweb/admin/index_usuario.php");
                     exit;

@@ -1,5 +1,16 @@
 <?php
-    session_start(); 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['id_usuario'])) {
+        // Si no hay sesión, redirigir al login
+        $_SESSION['mensaje'] = "Hay una sesión activa.";
+        header("Location: /omega_appweb/admin/login.php");
+        exit;
+    }
     if (isset($_SESSION['roles'])) {
         $roles = array_column($_SESSION['roles'], 'rol'); // Extraer los roles del usuario
         if (in_array('Administrador', $roles)) {
@@ -30,20 +41,36 @@
         value="<?php echo isset($citas['observaciones']) ? htmlspecialchars($citas['observaciones']) : ''; ?>" />
     </div>
     <div class="mb-3">
-        <label for="" >Empresa</label>
-        <select name="data[id_empresa]" id="id_empresa" class="form-select">
-            <?php foreach($empresa as $empresas): ?>
-            <?php 
-                $selected="";
-                if(isset($citas['id_empresa']) && $citas['id_empresa'] == $empresas['id_empresa']){
-                    $selected = "selected";
-                }
-            ?>
-            <option value="<?php echo($empresas['id_empresa']); ?>" <?php echo($selected); ?> ><?php echo($empresas['empresa']); ?></option>
+    <label for="id_empresa">Empresa</label>
+    <select name="data[id_empresa]" id="id_empresa" class="form-select" 
+        <?php echo in_array('Usuario', $roles) ? 'disabled' : ''; ?>>
+        <?php if (in_array('Usuario', $roles)): ?>
+            <!-- Usuario solo ve su empresa -->
+            <option value="<?php echo $_SESSION['id_empresa']; ?>" selected>
+                <?php echo $_SESSION['empresa_nombre']; ?>
+            </option>
+        <?php else: ?>
+            <!-- Administrador ve todas las empresas -->
+            <?php foreach ($empresa as $empresas): ?>
+                <?php 
+                    $selected = "";
+                    if (isset($citas['id_empresa']) && $citas['id_empresa'] == $empresas['id_empresa']) {
+                        $selected = "selected";
+                    }
+                ?>
+                <option value="<?php echo $empresas['id_empresa']; ?>" <?php echo $selected; ?>>
+                    <?php echo $empresas['empresa']; ?>
+                </option>
             <?php endforeach; ?>
-        </select>
-    </div>
-    
+        <?php endif; ?>
+    </select>
+    <!-- Campo oculto para enviar id_empresa si el combobox está deshabilitado -->
+    <?php if (in_array('Usuario', $roles)): ?>
+        <input type="hidden" name="data[id_empresa]" value="<?php echo $_SESSION['id_empresa']; ?>" />
+    <?php endif; ?>
+</div>
+
+
     <input type="submit" class="btn btn-success" name="data[enviar]" value="Guardar" />
 </form>
 <?php

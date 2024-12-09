@@ -1,4 +1,4 @@
-<?php require('views/header.php'); ?>
+<?php require_once('views/header.php'); ?>
 <h1> <?php if($accion=="crear"):echo('Nuevo');else: echo('Modificar');endif; ?> Usuario </h1>
 <form method="post" action="usuario.php?accion=<?php if($accion=="crear"):echo('nuevo');else:echo('modificar&id='.$id);endif; ?>">
     <div class="mb-3">

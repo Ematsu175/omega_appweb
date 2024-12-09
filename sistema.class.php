@@ -120,7 +120,21 @@
             return $result;
         }
 
-        function readOneEmpresa($id_usuario){
+        function readOneEmpresa($id_usuario) {
+            $this->conexion();
+            $result = [];
+            $consulta = 'SELECT e.id_empresa, e.empresa AS empresa 
+                         FROM usuario_empresa ue
+                         JOIN empresa e ON ue.id_empresa = e.id_empresa
+                         WHERE ue.id_usuario = :id_usuario;';
+            $sql = $this->con->prepare($consulta);
+            $sql->bindParam("id_usuario", $id_usuario, PDO::PARAM_INT);
+            $sql->execute();
+            $result = $sql->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        
+        /*function readOneEmpresa($id_usuario){
             $this->conexion();
             $result=[];
             $consulta='select id_empresa from usuario_empresa where id_usuario=:id_usuario;';
@@ -129,7 +143,7 @@
             $sql->execute();
             $result = $sql->fetch(PDO::FETCH_ASSOC);
             return $result;
-        }
+        }*/
         
 
     }
