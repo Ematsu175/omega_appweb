@@ -1,0 +1,17 @@
+{
+    "name": "emyva/omega_appweb",
+    "autoload": {
+        "psr-4": {
+            "Emyva\\OmegaAppweb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Emanuel",
+            "email": "emavazquez954@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^3.6"
+    }
+}
