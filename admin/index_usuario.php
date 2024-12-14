@@ -154,6 +154,6 @@
 </section>
 
 <?php
-    print_r($_SESSION);
+    //print_r($_SESSION);
     require_once('views/footer.php'); 
 ?>

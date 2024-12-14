@@ -1,94 +1,43 @@
-<h1>Registrate</h1>
-<!-- Login 8 - Bootstrap Brain Component -->
-<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/main.css">
-<section class="bg-light p-3 p-md-4 p-xl-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-xxl-11">
-                <div class="card border-light-subtle shadow-sm">
-                    <div class="row g-0">
-                        <div class="col-12 col-md-6">
-                            <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy"
-                                src="/omega_appweb/images/img_login.png" alt="Welcome back you've been missed!">
-                        </div>
-                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                            <div class="col-12 col-lg-11 col-xl-10">
-                                <div class="card-body p-3 p-md-4 p-xl-5">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="mb-5">
-                                                <div class="text-center mb-4">
-                                                    <a href="#!">
-                                                        <img src="/omega_appweb/images/img_login2.png"
-                                                            alt="BootstrapBrain Logo" width="175" height="57">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <form id="login" method="post" action="login.php?accion=login">
-                                        <div class="row gy-3 overflow-hidden">
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" name="data[correo]"
-                                                        id="email" placeholder="name@example.com" required>
-                                                    <label for="email" class="form-label">Empresa</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" name="data[correo]"
-                                                        id="email" placeholder="name@example.com" required>
-                                                    <label for="email" class="form-label">Teléfono</label>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" name="data[correo]"
-                                                        id="email" placeholder="name@example.com" required>
-                                                    <label for="email" class="form-label">Correo</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" name="data[correo]"
-                                                        id="email" placeholder="name@example.com" required>
-                                                    <label for="email" class="form-label">RFC</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" name="data[correo]"
-                                                        id="email" placeholder="name@example.com" required>
-                                                    <label for="email" class="form-label">Figura Fiscal</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="password" class="form-control" name="data[contrasena]"
-                                                        id="password" value="" placeholder="Password" required>
-                                                    <label for="password" class="form-label">Contraseña</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="d-grid">
-                                                    <input class="btn btn-dark btn-lg" type="submit"
-                                                        value="Crear Cuenta" name="enviar" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<?php require_once('views/header.php'); print_r($figura_fiscal);?>
+<h1> Registrate </h1>
+<form method="post" action="usuario.php?accion=nuevoUsuario">
+    <div class="mb-3">
+        <label for="correo">Correo</label>
+        <input type="email" name="data[correo]" id="correo" class="form-control" 
+               value="<?php echo isset($usuario['correo']) ? htmlspecialchars($usuario['correo']) : ''; ?>" required>
     </div>
-</section>
+    <div class="mb-3">
+        <label for="contrasena">Contraseña</label>
+        <input type="password" name="data[contrasena]" id="contrasena" class="form-control" 
+               placeholder="Escribe una nueva contraseña (opcional)">
+    </div>
+    <div class="mb-3">
+        <label for="empresa">Empresa</label>
+        <input type="text" name="data[empresa]" id="empresa" class="form-control" 
+               value="<?php echo isset($empresa['empresa']) ? htmlspecialchars($empresa['empresa']) : ''; ?>" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefono">Teléfono</label>
+        <input type="text" name="data[telefono]" id="telefono" class="form-control" 
+               value="<?php echo isset($empresa['telefono']) ? htmlspecialchars($empresa['telefono']) : ''; ?>" required>
+    </div>
+    <div class="mb-3">
+        <label for="rfc">RFC</label>
+        <input type="text" name="data[rfc]" id="rfc" class="form-control" 
+               value="<?php echo isset($empresa['rfc']) ? htmlspecialchars($empresa['rfc']) : ''; ?>" required>
+    </div>
+    <div class="mb-3">
+        <label for="id_figura_fiscal">Figura Fiscal</label>
+        <select name="data[id_figura_fiscal]" id="id_figura_fiscal" class="form-select" required>
+            <?php foreach ($figura_fiscal as $figura): ?>
+                <option value="<?php echo $figura['id_figura_fiscal']; ?>"
+                    <?php echo isset($empresa['id_figura_fiscal']) && $empresa['id_figura_fiscal'] == $figura['id_figura_fiscal'] ? 'selected' : ''; ?>>
+                    <?php echo htmlspecialchars($figura['figura_fiscal']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-success" name="data[enviar]" value="Guardar" />
+</form>
+
+<?php require('views/footer.php');?>

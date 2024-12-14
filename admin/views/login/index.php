@@ -52,7 +52,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-5">
-                        <a href="/omega_appweb/admin/registration.php" class="link-secondary text-decoration-none">Crear cuenta</a>
+                        <a href="usuario.php?accion=crearUsuario" class="link-secondary text-decoration-none">Crear cuenta</a>
                         <a href="#!" class="link-secondary text-decoration-none">¿Olvidaste tu contraseña?</a>
                       </div>
                     </div>
